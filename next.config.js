@@ -2,26 +2,19 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: true
-  },
-  // Add WebSocket configuration
-  webSocketServer: {
-    path: '/_next/webpack-hmr',
+    unoptimized: true,
   },
   // Configure development server
   webpack: (config, { dev, isServer }) => {
     if (dev && !isServer) {
-      // Ensure proper WebSocket connection in development
-      const wsPath = '/_next/webpack-hmr';
+      // WebSocket handling can be managed using environment variables or middleware
       config.devServer = {
         ...config.devServer,
-        webSocketServer: {
-          path: wsPath,
-        },
+        hot: true,
       };
     }
     return config;
-  }
-}
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
